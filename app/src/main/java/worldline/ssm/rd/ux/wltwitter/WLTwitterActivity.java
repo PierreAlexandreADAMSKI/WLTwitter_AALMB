@@ -34,6 +34,7 @@ public class WLTwitterActivity extends Activity {
             if ((null != extras) && (extras.containsKey(Constants.Login.EXTRA_LOGIN))) {
                 final String login = extras.getString(Constants.Login.EXTRA_LOGIN);
                 getActionBar().setTitle(login);
+                // new thread AsyncTask
                 RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask();
                 Log.i("WLTwittelrActivity", "Constants.Login.EXTRA_LOGIN - login " + login);
                 task.execute(login);
