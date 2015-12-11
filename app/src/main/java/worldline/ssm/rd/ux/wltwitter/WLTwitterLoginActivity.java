@@ -3,6 +3,7 @@ package worldline.ssm.rd.ux.wltwitter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -48,18 +49,23 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
-        if (TextUtils.isEmpty(mLoginEditText.getText())) {
+        String login = ((EditText) this.findViewById(R.id.loginEditText)).getText().toString();
+        String password = ((EditText) this.findViewById(R.id.passwordEditText)).getText().toString();
+        if (TextUtils.isEmpty(login)) {
             Toast.makeText(this, R.string.error_no_login, Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(mPasswordEditText.getText())) {
+        if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, R.string.error_no_password, Toast.LENGTH_LONG).show();
             return;
         }
-        final Intent homeIntent = getNameActivityIntent(mLoginEditText.getText().toString());
-        PreferenceUtils.setLogin(mLoginEditText.getText().toString());
-        PreferenceUtils.setPassword(mPasswordEditText.getText().toString());
-        startActivity(homeIntent);
+        PreferenceUtils.setLogin(login);
+        PreferenceUtils.setPassword(password);
+        Intent WLTwitterIntent = new Intent(WLTwitterApplication.getContext(), WLTwitterActivity.class);
+        Bundle b = new Bundle();
+        b.putString(Constants.Login.EXTRA_LOGIN, login);
+        WLTwitterIntent.putExtras(b);
+        startActivity(WLTwitterIntent);
     }
 
     /**

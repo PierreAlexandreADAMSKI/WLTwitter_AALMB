@@ -27,7 +27,6 @@ public class WLTwitterActivity extends Activity {
          */
 
         setContentView(R.layout.activity_main);
-
         final Intent intent = getIntent(); //get the Intent that started the activity
         if (null != intent) {
             final Bundle extras = intent.getExtras(); //get the "map" of the data
