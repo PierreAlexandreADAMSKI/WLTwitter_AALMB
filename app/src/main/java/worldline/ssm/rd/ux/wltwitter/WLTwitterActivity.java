@@ -34,23 +34,10 @@ public class WLTwitterActivity extends Activity {
 
             if ((null != extras) && (extras.containsKey(Constants.Login.EXTRA_LOGIN))) {
                 final String login = extras.getString(Constants.Login.EXTRA_LOGIN);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //do stuff
-                        RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask ();
-                        Log.i("WLTwittelrActivity","Constants.Login.EXTRA_LOGIN - login " + login);
-                        task.execute(login);
-                        //then call this comming method in an activity to change gui
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //do gui changes
-                                getActionBar().setTitle(login);
-                            }
-                        });
-                    }
-                });
+                getActionBar().setTitle(login);
+                RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask();
+                Log.i("WLTwittelrActivity", "Constants.Login.EXTRA_LOGIN - login " + login);
+                task.execute(login);
             }
         }
     }

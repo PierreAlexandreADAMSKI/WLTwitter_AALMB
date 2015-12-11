@@ -11,16 +11,17 @@ import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 /**
  * Created by mb-p_pilou on 10/12/2015.
  */
-public class RetrieveTweetsAsyncTask extends AsyncTask<String, Void, List<Tweet>>{
+public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Tweet>>{
 
     @Override
     protected List<Tweet> doInBackground(String... params) {
-        String login = params[0];
+        String login = null;
+        if (params!=null && params.length>0) login = params[0];
         if (login != null){
             List<Tweet> tweetList = TwitterHelper.getTweetsOfUser(login);
             Log.i("WLTwitterActivity","RetrieveTweetsAsyncTask.doInBackground(login) - tweet list " + tweetList);
             return tweetList;
-        }else return null;
+        }else return TwitterHelper.getFakeTweets();
     }
 
     @Override
