@@ -1,6 +1,7 @@
 package worldline.ssm.rd.ux.wltwitter;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,13 +34,19 @@ public class WLTwitterActivity extends Activity {
 
             if ((null != extras) && (extras.containsKey(Constants.Login.EXTRA_LOGIN))) {
                 final String login = extras.getString(Constants.Login.EXTRA_LOGIN);
-                getActionBar().setTitle(login);
+                final String test = PreferenceUtils.getLogin();
+                //set user name as subtitle
+                getActionBar().setSubtitle(test);
                 // new thread AsyncTask
                 RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask();
                 Log.i("WLTwittelrActivity", "Constants.Login.EXTRA_LOGIN - login " + login);
                 task.execute(login);
             }
         }
+
+        FragmentTransaction tweetListTransaction = getFragmentManager().beginTransaction();
+        tweetListTransaction.add(R.id.main, new WLTwitterTweetsListFragment());
+        tweetListTransaction.commit();
     }
 
 

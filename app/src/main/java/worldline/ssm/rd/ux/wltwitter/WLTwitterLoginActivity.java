@@ -49,22 +49,29 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
+        // get the login from id loginEditText on the activity_main.xml
+        // cast the String as an EditText for compatibility
         String login = ((EditText) this.findViewById(R.id.loginEditText)).getText().toString();
         String password = ((EditText) this.findViewById(R.id.passwordEditText)).getText().toString();
+
         if (TextUtils.isEmpty(login)) {
+            // if login is empty throw a toast
             Toast.makeText(this, R.string.error_no_login, Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
+            // if password is empty throw a toast
             Toast.makeText(this, R.string.error_no_password, Toast.LENGTH_LONG).show();
             return;
         }
+        //set preferences
         PreferenceUtils.setLogin(login);
         PreferenceUtils.setPassword(password);
+        // instanciate a new intent of the WLTwitterActivity in WLTwitterApplication's context
         Intent WLTwitterIntent = new Intent(WLTwitterApplication.getContext(), WLTwitterActivity.class);
-        Bundle b = new Bundle();
-        b.putString(Constants.Login.EXTRA_LOGIN, login);
-        WLTwitterIntent.putExtras(b);
+        Bundle extra = new Bundle();
+        extra.putString(Constants.Login.EXTRA_LOGIN, login);
+        WLTwitterIntent.putExtras(extra);
         startActivity(WLTwitterIntent);
     }
 

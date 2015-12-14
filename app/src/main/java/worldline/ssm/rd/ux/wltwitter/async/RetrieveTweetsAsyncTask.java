@@ -19,7 +19,6 @@ public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Twe
         if (params!=null && params.length>0) login = params[0];
         if (login != null){
             List<Tweet> tweetList = TwitterHelper.getTweetsOfUser(login);
-            Log.i("WLTwitterActivity","RetrieveTweetsAsyncTask.doInBackground(login) - tweet list " + tweetList);
             return tweetList;
         }else return TwitterHelper.getFakeTweets();
     }
@@ -28,7 +27,7 @@ public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Twe
     protected void onPostExecute(List<Tweet> tweets) {
         super.onPostExecute(tweets);
         for (Tweet tweet : tweets){
-            System.out.println("["+R.string.app_name+"]"+tweet.text);
+            Log.d("Tweets",tweet.text);
         }
 
     }
