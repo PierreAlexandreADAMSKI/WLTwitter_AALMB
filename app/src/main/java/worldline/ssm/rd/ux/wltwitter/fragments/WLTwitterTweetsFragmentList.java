@@ -61,6 +61,7 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
         ViewGroup listFragmentView = (ViewGroup) tweetsListView.findViewById(R.id.tweets_list_fragment);
         listFragmentView.addView(progressBar);
 
+        //set up ItemClick
         listView.setOnItemClickListener(this);
 
         return tweetsListView;
@@ -82,6 +83,7 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 tweets);
+        //set up tweetArray adapter
         listView.setAdapter(tweetArrayAdapter);
     }
 
@@ -90,6 +92,7 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
         super.onAttach(activity);
 
         if (activity instanceof WLTwitterTweetListener){
+            // I DON'T KNOW WHAT IS THAT FOR
             tweetListener = (WLTwitterTweetListener) activity;
         }
     }
@@ -97,7 +100,9 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
     @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         if (listView != null){
+            //get the tweet which you clicked on by his position
             final Tweet tweet = (Tweet) adapterView.getItemAtPosition(position);
+            //throw a toast
             tweetListener.onViewTweet(tweet);
         }
     }

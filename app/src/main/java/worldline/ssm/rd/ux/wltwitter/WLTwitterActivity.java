@@ -41,11 +41,14 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
                 final String login = PreferenceUtils.getLogin();
                 //set user name as subtitle
                 getActionBar().setSubtitle(login);
-            }
 
-            FragmentTransaction tweetListTransaction = getFragmentManager().beginTransaction();
-            tweetListTransaction.add(R.id.main_activity, new WLTwitterTweetsFragmentList());
-            tweetListTransaction.commit();
+                //create a transaction to the fragment threw FragmentManager
+                FragmentTransaction tweetListTransaction = getFragmentManager().beginTransaction();
+                //add the Fragment container "main_activity" by id to the Transaction and tell the target fragment
+                tweetListTransaction.add(R.id.main_activity, new WLTwitterTweetsFragmentList());
+                //commit transaction
+                tweetListTransaction.commit();
+            }
         }
 
 
@@ -61,16 +64,15 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // get the id of the incoming item
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        //logout
         if (id == R.id.actionLogout) {
+            //clear preferences but not TextView
             PreferenceUtils.setLogin(null);
             PreferenceUtils.setPassword(null);
-
+            //end of activity
             finish();
             return true;
         }
@@ -85,6 +87,7 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
 
     @Override
     public void onViewTweet(Tweet tweet) {
+        //throw a toast
         Toast.makeText(this, tweet.text, Toast.LENGTH_LONG).show();
     }
 }

@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import worldline.ssm.rd.ux.wltwitter.utils.Constants;
 import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
@@ -68,6 +69,11 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         PreferenceUtils.setLogin(login);
         PreferenceUtils.setPassword(password);
 
+        /* -- need find a way to clear TextView
+         * and save login for "remember me"
+         * before to startthe activity -- */
+
+        //start new activity
         startActivity(getNameActivityIntent(login));
     }
 
@@ -85,8 +91,10 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         // instanciate a new intent of the WLTwitterActivity in WLTwitterApplication's context
         Intent WLTwitterIntent = new Intent(this, WLTwitterActivity.class);
         Bundle extra = new Bundle();
+        //save login in Bundle
         extra.putString(Constants.Login.EXTRA_LOGIN, login);
         WLTwitterIntent.putExtras(extra);
+        
         return WLTwitterIntent;
     }
 }

@@ -12,7 +12,7 @@ import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 /**
  * Created by mb-p_pilou on 10/12/2015.
  */
-public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Tweet>>{
+public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Tweet>> {
 
     private WLTwitterTweetChangeListener tweetChangeListener;
 
@@ -23,21 +23,27 @@ public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Twe
     @Override
     protected List<Tweet> doInBackground(String... params) {
         String login = null;
-        if (params!=null && params.length>0) login = params[0];
-        if (login != null){
+        if (params != null && params.length > 0) login = params[0];
+        if (login != null) {
+            //get the tweets list from user account and return it
             List<Tweet> tweetList = TwitterHelper.getTweetsOfUser(login);
             return tweetList;
-        }else return TwitterHelper.getFakeTweets();
+        } else {
+            //if account is fake return fake list
+            return TwitterHelper.getFakeTweets();
+        }
     }
 
     @Override
     protected void onPostExecute(List<Tweet> tweets) {
         super.onPostExecute(tweets);
-        if (tweetChangeListener !=null){
+        if (tweetChangeListener != null) {
+            //get listener informed to retrieve on incoming tweets when postExecute
             tweetChangeListener.onTweetRetrieved(tweets);
         }
-        for (Tweet tweet : tweets){
-            Log.d("Tweets",tweet.text);
+        for (Tweet tweet : tweets) {
+            //print the tweets in the logcat
+            Log.d("Tweets", tweet.text);
         }
 
     }
