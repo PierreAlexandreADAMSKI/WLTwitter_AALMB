@@ -4,17 +4,13 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.List;
 
-import worldline.ssm.rd.ux.wltwitter.async.RetrieveTweetsAsyncTask;
 import worldline.ssm.rd.ux.wltwitter.fragments.WLTwitterTweetsFragmentList;
-import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetChangeListener;
 import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 import worldline.ssm.rd.ux.wltwitter.utils.Constants;
@@ -42,17 +38,17 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
             final Bundle extras = intent.getExtras(); //get the "map" of the data
 
             if ((null != extras) && (extras.containsKey(Constants.Login.EXTRA_LOGIN))) {
-                final String login = extras.getString(Constants.Login.EXTRA_LOGIN);
-                final String test = PreferenceUtils.getLogin();
+                final String login = PreferenceUtils.getLogin();
                 //set user name as subtitle
-                getActionBar().setSubtitle(test);
-
+                getActionBar().setSubtitle(login);
             }
+
+            FragmentTransaction tweetListTransaction = getFragmentManager().beginTransaction();
+            tweetListTransaction.add(R.id.main_activity, new WLTwitterTweetsFragmentList());
+            tweetListTransaction.commit();
         }
 
-        FragmentTransaction tweetListTransaction = getFragmentManager().beginTransaction();
-        tweetListTransaction.add(R.id.main_activity, new WLTwitterTweetsFragmentList());
-        tweetListTransaction.commit();
+
     }
 
 

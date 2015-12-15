@@ -3,6 +3,7 @@ package worldline.ssm.rd.ux.wltwitter.fragments;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,9 +26,9 @@ import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
 
 /**
- * A simple {@link ListFragment} subclass.
+ * A simple {@link Fragment} subclass.
  */
-public class WLTwitterTweetsFragmentList extends ListFragment implements WLTwitterTweetChangeListener, AdapterView.OnItemClickListener {
+public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTweetChangeListener, AdapterView.OnItemClickListener {
 
     private RetrieveTweetsAsyncTask retrieveTweetsAsyncTask;
     private ListView listView;
