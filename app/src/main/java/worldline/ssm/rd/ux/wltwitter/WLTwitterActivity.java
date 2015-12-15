@@ -7,18 +7,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import worldline.ssm.rd.ux.wltwitter.async.RetrieveTweetsAsyncTask;
 import worldline.ssm.rd.ux.wltwitter.fragments.WLTwitterTweetsFragmentList;
-import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetsChangeListener;
+import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetChangeListener;
+import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 import worldline.ssm.rd.ux.wltwitter.utils.Constants;
 import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
 
 
-public class WLTwitterActivity extends Activity {
+public class WLTwitterActivity extends Activity implements WLTwitterTweetListener {
+
     /**
      * @param savedInstanceState
      */
@@ -42,10 +46,7 @@ public class WLTwitterActivity extends Activity {
                 final String test = PreferenceUtils.getLogin();
                 //set user name as subtitle
                 getActionBar().setSubtitle(test);
-                // new thread AsyncTask
-                //RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask();
-                Log.i("WLTwittelrActivity", "Constants.Login.EXTRA_LOGIN - login " + login);
-                //task.execute(login);
+
             }
         }
 
@@ -79,5 +80,15 @@ public class WLTwitterActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRetweet(Tweet tweet) {
+
+    }
+
+    @Override
+    public void onViewTweet(Tweet tweet) {
+        Toast.makeText(this, tweet.text, Toast.LENGTH_LONG).show();
     }
 }

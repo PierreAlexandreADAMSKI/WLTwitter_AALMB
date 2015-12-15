@@ -67,12 +67,8 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         //set preferences
         PreferenceUtils.setLogin(login);
         PreferenceUtils.setPassword(password);
-        // instanciate a new intent of the WLTwitterActivity in WLTwitterApplication's context
-        Intent WLTwitterIntent = new Intent(WLTwitterApplication.getContext(), WLTwitterActivity.class);
-        Bundle extra = new Bundle();
-        extra.putString(Constants.Login.EXTRA_LOGIN, login);
-        WLTwitterIntent.putExtras(extra);
-        startActivity(WLTwitterIntent);
+
+        startActivity(getNameActivityIntent(login));
     }
 
     /**
@@ -82,15 +78,16 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
      * We use the putExtra method to store it. putString method permit to set a String value
      * in the preference editor.
      *
-     * @param userName
+     * @param login
      * @return Intent
      */
-    private Intent getNameActivityIntent(String userName) {
-        Intent intent = new Intent(this, WLTwitterActivity.class);
-        final Bundle extras = new Bundle();
-        extras.putString(Constants.Login.EXTRA_LOGIN, userName);
-        intent.putExtras(extras);
-        return intent;
+    private Intent getNameActivityIntent(String login) {
+        // instanciate a new intent of the WLTwitterActivity in WLTwitterApplication's context
+        Intent WLTwitterIntent = new Intent(this, WLTwitterActivity.class);
+        Bundle extra = new Bundle();
+        extra.putString(Constants.Login.EXTRA_LOGIN, login);
+        WLTwitterIntent.putExtras(extra);
+        return WLTwitterIntent;
     }
 }
 

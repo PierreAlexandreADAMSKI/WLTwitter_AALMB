@@ -4,9 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
-import worldline.ssm.rd.ux.wltwitter.R;
+
 import worldline.ssm.rd.ux.wltwitter.helpers.TwitterHelper;
-import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetsChangeListener;
+import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetChangeListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 
 /**
@@ -14,10 +14,10 @@ import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
  */
 public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Tweet>>{
 
-    private WLTwitterTweetsChangeListener tweetsChangeListener;
+    private WLTwitterTweetChangeListener tweetChangeListener;
 
-    public RetrieveTweetsAsyncTask(WLTwitterTweetsChangeListener tweetsChangeListener) {
-        this.tweetsChangeListener = tweetsChangeListener;
+    public RetrieveTweetsAsyncTask(WLTwitterTweetChangeListener tweetChangeListener) {
+        this.tweetChangeListener = tweetChangeListener;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Twe
     @Override
     protected void onPostExecute(List<Tweet> tweets) {
         super.onPostExecute(tweets);
-        if (tweetsChangeListener!=null){
-            tweetsChangeListener.onTweetRetrieved(tweets);
+        if (tweetChangeListener !=null){
+            tweetChangeListener.onTweetRetrieved(tweets);
         }
         for (Tweet tweet : tweets){
             Log.d("Tweets",tweet.text);
