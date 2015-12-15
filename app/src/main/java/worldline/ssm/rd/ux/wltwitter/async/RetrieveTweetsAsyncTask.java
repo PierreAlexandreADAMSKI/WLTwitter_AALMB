@@ -4,8 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
-import worldline.ssm.rd.ux.wltwitter.R;
+
 import worldline.ssm.rd.ux.wltwitter.helpers.TwitterHelper;
+import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetChangeListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 
 /**
@@ -13,13 +14,18 @@ import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
  */
 public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Tweet>>{
 
+    private WLTwitterTweetChangeListener tweetChangeListener;
+
+    public RetrieveTweetsAsyncTask(WLTwitterTweetChangeListener tweetChangeListener) {
+        this.tweetChangeListener = tweetChangeListener;
+    }
+
     @Override
     protected List<Tweet> doInBackground(String... params) {
         String login = null;
         if (params!=null && params.length>0) login = params[0];
         if (login != null){
             List<Tweet> tweetList = TwitterHelper.getTweetsOfUser(login);
-            Log.i("WLTwitterActivity","RetrieveTweetsAsyncTask.doInBackground(login) - tweet list " + tweetList);
             return tweetList;
         }else return TwitterHelper.getFakeTweets();
     }
@@ -27,8 +33,11 @@ public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Twe
     @Override
     protected void onPostExecute(List<Tweet> tweets) {
         super.onPostExecute(tweets);
+        if (tweetChangeListener !=null){
+            tweetChangeListener.onTweetRetrieved(tweets);
+        }
         for (Tweet tweet : tweets){
-            System.out.println("["+R.string.app_name+"]"+tweet.text);
+            Log.d("Tweets",tweet.text);
         }
 
     }

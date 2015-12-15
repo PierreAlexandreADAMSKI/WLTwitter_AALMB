@@ -49,23 +49,26 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
+        // get the login from id loginEditText on the activity_main.xml
+        // cast the String as an EditText for compatibility
         String login = ((EditText) this.findViewById(R.id.loginEditText)).getText().toString();
         String password = ((EditText) this.findViewById(R.id.passwordEditText)).getText().toString();
+
         if (TextUtils.isEmpty(login)) {
+            // if login is empty throw a toast
             Toast.makeText(this, R.string.error_no_login, Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
+            // if password is empty throw a toast
             Toast.makeText(this, R.string.error_no_password, Toast.LENGTH_LONG).show();
             return;
         }
+        //set preferences
         PreferenceUtils.setLogin(login);
         PreferenceUtils.setPassword(password);
-        Intent WLTwitterIntent = new Intent(WLTwitterApplication.getContext(), WLTwitterActivity.class);
-        Bundle b = new Bundle();
-        b.putString(Constants.Login.EXTRA_LOGIN, login);
-        WLTwitterIntent.putExtras(b);
-        startActivity(WLTwitterIntent);
+
+        startActivity(getNameActivityIntent(login));
     }
 
     /**
@@ -75,15 +78,16 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
      * We use the putExtra method to store it. putString method permit to set a String value
      * in the preference editor.
      *
-     * @param userName
+     * @param login
      * @return Intent
      */
-    private Intent getNameActivityIntent(String userName) {
-        Intent intent = new Intent(this, WLTwitterActivity.class);
-        final Bundle extras = new Bundle();
-        extras.putString(Constants.Login.EXTRA_LOGIN, userName);
-        intent.putExtras(extras);
-        return intent;
+    private Intent getNameActivityIntent(String login) {
+        // instanciate a new intent of the WLTwitterActivity in WLTwitterApplication's context
+        Intent WLTwitterIntent = new Intent(this, WLTwitterActivity.class);
+        Bundle extra = new Bundle();
+        extra.putString(Constants.Login.EXTRA_LOGIN, login);
+        WLTwitterIntent.putExtras(extra);
+        return WLTwitterIntent;
     }
 }
 
