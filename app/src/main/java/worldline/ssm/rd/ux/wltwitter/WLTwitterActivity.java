@@ -8,7 +8,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 import worldline.ssm.rd.ux.wltwitter.async.RetrieveTweetsAsyncTask;
+import worldline.ssm.rd.ux.wltwitter.fragments.WLTwitterTweetsFragmentList;
+import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetsChangeListener;
+import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 import worldline.ssm.rd.ux.wltwitter.utils.Constants;
 import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
 
@@ -38,14 +43,14 @@ public class WLTwitterActivity extends Activity {
                 //set user name as subtitle
                 getActionBar().setSubtitle(test);
                 // new thread AsyncTask
-                RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask();
+                //RetrieveTweetsAsyncTask task = new RetrieveTweetsAsyncTask();
                 Log.i("WLTwittelrActivity", "Constants.Login.EXTRA_LOGIN - login " + login);
-                task.execute(login);
+                //task.execute(login);
             }
         }
 
         FragmentTransaction tweetListTransaction = getFragmentManager().beginTransaction();
-        tweetListTransaction.add(R.id.main, new WLTwitterTweetsListFragment());
+        tweetListTransaction.add(R.id.main_activity, new WLTwitterTweetsFragmentList());
         tweetListTransaction.commit();
     }
 
