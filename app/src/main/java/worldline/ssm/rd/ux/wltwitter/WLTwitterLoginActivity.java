@@ -17,14 +17,12 @@ import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
  */
 public class WLTwitterLoginActivity extends Activity implements View.OnClickListener {
 
-    private EditText mLoginEditText;
-    private EditText mPasswordEditText;
+    private EditText login;
+    private EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        findViewById(R.id.loginButton).setOnClickListener(this);
         /**
          * findViewById permit to locate the component which interest us to interact with it
          * @loginButton here we get the View thanks to the ID of LoginButton (component Button, in
@@ -36,6 +34,9 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
          * setOnClickListener
          * @this is token by setOnClickListener
          */
+        setContentView(R.layout.activity_login);
+        findViewById(R.id.loginButton).setOnClickListener(this);
+
     }
 
     /**
@@ -52,29 +53,29 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
     public void onClick(View v) {
         // get the login from id loginEditText on the activity_main.xml
         // cast the String as an EditText for compatibility
-        String login = ((EditText) this.findViewById(R.id.loginEditText)).getText().toString();
-        String password = ((EditText) this.findViewById(R.id.passwordEditText)).getText().toString();
+        login = (EditText) this.findViewById(R.id.loginEditText);
+        password = (EditText) this.findViewById(R.id.passwordEditText);
 
-        if (TextUtils.isEmpty(login)) {
+        if (TextUtils.isEmpty(login.getText().toString())) {
             // if login is empty throw a toast
             Toast.makeText(this, R.string.error_no_login, Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(password.getText().toString())) {
             // if password is empty throw a toast
             Toast.makeText(this, R.string.error_no_password, Toast.LENGTH_LONG).show();
             return;
         }
         //set preferences
-        PreferenceUtils.setLogin(login);
-        PreferenceUtils.setPassword(password);
+        PreferenceUtils.setLogin(login.getText().toString());
+        PreferenceUtils.setPassword(password.getText().toString());
 
-        /* -- need find a way to clear TextView
-         * and save login for "remember me"
-         * before to startthe activity -- */
+        //clear the editable text box just before connexion so box will be empty when logging out
+        login.setText("", TextView.BufferType.EDITABLE);
+        password.setText("", TextView.BufferType.EDITABLE);
 
         //start new activity
-        startActivity(getNameActivityIntent(login));
+        startActivity(getNameActivityIntent(login.getText().toString()));
     }
 
     /**
@@ -97,5 +98,6 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         
         return WLTwitterIntent;
     }
+
 }
 
