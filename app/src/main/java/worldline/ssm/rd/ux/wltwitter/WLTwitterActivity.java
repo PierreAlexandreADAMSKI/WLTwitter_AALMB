@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -15,6 +15,10 @@ import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 import worldline.ssm.rd.ux.wltwitter.utils.Constants;
 import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
+
+import static worldline.ssm.rd.ux.wltwitter.WLTwitterLoginActivity.login;
+import static worldline.ssm.rd.ux.wltwitter.WLTwitterLoginActivity.password;
+import static worldline.ssm.rd.ux.wltwitter.WLTwitterLoginActivity.saveLoginCheckBox;
 
 
 public class WLTwitterActivity extends Activity implements WLTwitterTweetListener {
@@ -69,7 +73,11 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
 
         //logout
         if (id == R.id.actionLogout) {
-            //clear preferences but not TextView
+            if (!saveLoginCheckBox.isChecked()) {
+                //clear preferences but not TextView
+                login.setText("", TextView.BufferType.EDITABLE);
+                password.setText("", TextView.BufferType.EDITABLE);
+            }
             PreferenceUtils.setLogin(null);
             PreferenceUtils.setPassword(null);
             //end of activity

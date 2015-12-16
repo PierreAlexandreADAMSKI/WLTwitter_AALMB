@@ -2,10 +2,12 @@ package worldline.ssm.rd.ux.wltwitter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +19,9 @@ import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
  */
 public class WLTwitterLoginActivity extends Activity implements View.OnClickListener {
 
-    private EditText login;
-    private EditText password;
+    public static EditText login;
+    public static EditText password;
+    public static CheckBox saveLoginCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,10 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         setContentView(R.layout.activity_login);
         findViewById(R.id.loginButton).setOnClickListener(this);
 
+        //if remember me was already checked then show login and password and check the box
+        if (!PreferenceUtils.getCheckBox()) {
+            saveLoginCheckBox.setChecked(true);
+        }
     }
 
     /**
@@ -54,7 +61,9 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         // get the login from id loginEditText on the activity_main.xml
         // cast the String as an EditText for compatibility
         login = (EditText) this.findViewById(R.id.loginEditText);
+        Log.i("onClick(View) - user login ",login.getText().toString());
         password = (EditText) this.findViewById(R.id.passwordEditText);
+        saveLoginCheckBox = (CheckBox)findViewById(R.id.saveLoginCheckBox);
 
         if (TextUtils.isEmpty(login.getText().toString())) {
             // if login is empty throw a toast
@@ -70,13 +79,17 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
         PreferenceUtils.setLogin(login.getText().toString());
         PreferenceUtils.setPassword(password.getText().toString());
 
-        //clear the editable text box just before connexion so box will be empty when logging out
-        login.setText("", TextView.BufferType.EDITABLE);
-        password.setText("", TextView.BufferType.EDITABLE);
+
+        //if box is checked mention it for next time
+        if (saveLoginCheckBox.isChecked()) {
+            Toast.makeText(this, "Login saved as : " + login.getText().toString(), Toast.LENGTH_LONG).show();
+            PreferenceUtils.setCheckBox(true);
+        }
 
         //start new activity
         startActivity(getNameActivityIntent(login.getText().toString()));
     }
+
 
     /**
      * getNameActivityIntent return an Intent, as we already know, an Intent can store serializable

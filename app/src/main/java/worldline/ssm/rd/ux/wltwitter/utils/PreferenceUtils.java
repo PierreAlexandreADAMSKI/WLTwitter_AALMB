@@ -24,12 +24,21 @@ public class PreferenceUtils {
         final SharedPreferences prefs = getSharedPreferences();
         prefs.edit().putString(Constants.Preferences.PREF_LOGIN, login).commit();
     }
-    public static String getPassord(){
+    public static String getPassword(){
         final SharedPreferences prefs = getSharedPreferences();
         return prefs.getString(Constants.Preferences.PREF_PASSWORD,null);
     }
     public static void setPassword(String password){
         final SharedPreferences prefs = getSharedPreferences();
         prefs.edit().putString(Constants.Preferences.PREF_PASSWORD,password).commit();
+    }
+
+    public static Boolean getCheckBox(){
+        final SharedPreferences prefs = getSharedPreferences();
+        return prefs.getBoolean(Constants.Preferences.PREF_CHECKBOX,false);
+    }
+    public static void setCheckBox(Boolean checkBox){
+        final SharedPreferences prefs = getSharedPreferences();
+        prefs.edit().putBoolean(Constants.Preferences.PREF_CHECKBOX, checkBox).commit();
     }
 }
