@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/white_blue_round_corners_selector">
+    android:background="@drawable/white_blue_round_corners_selector"
+    android:id="@+id/login_activity" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_hint"
-            android:inputType="text" />
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/passwordEditText"
