@@ -18,4 +18,7 @@
     <string name="action_settings">Title!</string>
     <string name="sign_in">Sign in</string>
     <string name="remember_me_hint">Remember me?</string>
+
+    <!-- ADAPTER -->
+    <string name="retweet">Retweet</string>
 </resources>

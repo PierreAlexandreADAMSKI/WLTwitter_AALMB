@@ -4,7 +4,6 @@ package worldline.ssm.rd.ux.wltwitter.fragments;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -20,6 +18,7 @@ import java.util.List;
 
 import worldline.ssm.rd.ux.wltwitter.R;
 import worldline.ssm.rd.ux.wltwitter.async.RetrieveTweetsAsyncTask;
+import worldline.ssm.rd.ux.wltwitter.fragments.adapter.WLTwitterTweetAdapter;
 import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetChangeListener;
 import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
@@ -79,21 +78,18 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
 
     @Override
     public void onTweetRetrieved(List<Tweet> tweets) {
-        final ArrayAdapter<Tweet> tweetArrayAdapter = new ArrayAdapter<Tweet>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                tweets);
-        //set up tweetArray adapter
-        listView.setAdapter(tweetArrayAdapter);
+        final WLTwitterTweetAdapter tweetAdapter = new WLTwitterTweetAdapter(tweets);
+        //set up tweet adapter
+        listView.setAdapter(tweetAdapter);
     }
 
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
         if (activity instanceof WLTwitterTweetListener){
-            //Set up tweetListener if finger tap on a tweet
+            //Pass the Activity threw a listener
             tweetListener = (WLTwitterTweetListener) activity;
         }
     }

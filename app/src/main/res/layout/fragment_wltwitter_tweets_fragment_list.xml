@@ -10,8 +10,5 @@
         android:id="@+id/tweets_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/grey_twitter"
-        android:dividerHeight="10dp"
-        android:padding="@dimen/tweet_list_item_padding"/>
-
+        android:dividerHeight="10dp"/>
 </RelativeLayout>
