@@ -87,12 +87,13 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
         listView.setAdapter(tweetArrayAdapter);
     }
 
+    
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
         if (activity instanceof WLTwitterTweetListener){
-            // I DON'T KNOW WHAT IS THAT FOR
+            //Set up tweetListener if finger tap on a tweet
             tweetListener = (WLTwitterTweetListener) activity;
         }
     }
