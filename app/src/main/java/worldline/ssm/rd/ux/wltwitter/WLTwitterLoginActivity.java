@@ -66,10 +66,11 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
             public void onGlobalLayout() {
                 //on all of the container area create a rectangle off same height and width
                 Rect r = new Rect();
+                //put the size of the layout to the rectangle
                 loginActivity.getWindowVisibleDisplayFrame(r);
                 //check if the rectangle height shrinks like when keyboard launches
                 //for than check on the difference between regular container's height and
-                //updated container's height when a system item appears
+                //actual container's
                 int heightDiff = loginActivity.getRootView().getHeight() - (r.bottom - r.top);
                 if (login != null && password != null) {
                     // if more than 100 pixels, its probably a keyboard...
