@@ -35,7 +35,6 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
          * it takes an integer as an ID for the ressource (the XML file of the layout)
          * this integer, is generated automatically (R.layout.nameoftheactivity)
          */
-        // Thomas test le commit!
 
         setContentView(R.layout.activity_main);
         final Intent intent = getIntent(); //get the Intent that started the activity
