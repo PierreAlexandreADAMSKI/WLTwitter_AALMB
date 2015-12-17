@@ -1,64 +1,69 @@
 package worldline.ssm.rd.ux.wltwitter.fragments.adapter;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ListAdapter;
 
 import java.util.List;
 
 import worldline.ssm.rd.ux.wltwitter.R;
 import worldline.ssm.rd.ux.wltwitter.WLTwitterApplication;
+import worldline.ssm.rd.ux.wltwitter.fragments.viewHolders.WLTwitterTweetViewHolder;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 
 /**
  * Created by mb-p_pilou on 17/12/2015.
  */
-public class WLTwitterTweetAdapter extends BaseAdapter {
+public class WLTwitterTweetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater inflater = LayoutInflater.from(WLTwitterApplication.getContext());
-    List<Tweet> tweets;
+    private List<Tweet> tweets;
 
     public WLTwitterTweetAdapter(List<Tweet> tweets) {
         this.tweets = tweets;
     }
 
     @Override
-    public int getCount() {
-        return null != tweets ? tweets.size() : 0;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        WLTwitterTweetViewHolder viewHolder;
+        View convertView = parent.getChildAt(getItemCount());
+        //if the reused view is null then inflate the list of tweets
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.tweet_fragment_adapter, null);
+            //instantiate the viewHolder on the reused view
+            viewHolder = new WLTwitterTweetViewHolder(convertView);
+            //tag to convertView to get it back easily
+            convertView.setTag(viewHolder);
+        } else {
+            //if the old view exists set the holder by tag
+            viewHolder = (WLTwitterTweetViewHolder) convertView.getTag();
+        }
+
+        return viewHolder;
     }
 
     @Override
-    public Object getItem(int position) {
-        return null != tweets ? tweets.get(position) : null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        //inflate the view of the tweet adapter
-        final View view = inflater.inflate(R.layout.tweet_fragment_adapter,null);
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         //get the current tweet
-        final Tweet tweet = (Tweet) getItem(position);
-        //set up username
-        //
-        TextView username = (TextView) view.findViewById(R.id.tweet_username);
-        username.setText(tweet.user.name);
+        final Tweet tweet = getItem(position);
+        //set up username in the holder
+        ((WLTwitterTweetViewHolder) viewHolder).username.setText(tweet.user.name);
         //set up alias
-        final TextView alias = (TextView) view.findViewById(R.id.tweet_alias);
-        alias.setText("@"+tweet.user.screenName);
+        ((WLTwitterTweetViewHolder) viewHolder).alias.setText("@" + tweet.user.screenName);
         //set up tweet
-        final TextView tweetContent = (TextView) view.findViewById(R.id.tweet_content);
-        tweetContent.setText(tweet.text);
+        ((WLTwitterTweetViewHolder) viewHolder).tweetContent.setText(tweet.text);
         //set up user image
-        final ImageView image = (ImageView) view.findViewById(R.id.image);
-        //image.setImageURI(t);
-        return view;
+    }
+
+    @Override
+    public int getItemCount() {
+        return tweets != null ? tweets.size() : 0;
+    }
+
+    public Tweet getItem(int position) {
+        return tweets != null ? tweets.get(position) : null;
     }
 }
