@@ -1,14 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tweets_list_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@color/grey_twitter"
     tools:context="worldline.ssm.rd.ux.wltwitter.fragments.WLTwitterTweetsFragmentList">
 
-    <ListView
-        android:id="@+id/tweets_list_view"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wifiRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="10dp"/>
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 </RelativeLayout>

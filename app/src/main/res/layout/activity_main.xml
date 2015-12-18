@@ -9,33 +9,4 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <!--<RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/blue_round_corners_background"
-        android:padding="10dp">
-        android:
-
-        <TextView
-            android:id="@+id/congrats"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/congrats"
-            android:textColor="@color/primary_dark_material_dark"
-            android:textSize="50px"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/congrats"
-            android:gravity="center"
-            android:text="@string/success_login"
-            android:textColor="@color/material_blue_grey_900"
-            android:textSize="40px"
-            android:textStyle="bold" />
-    </RelativeLayout>-->
-
 </RelativeLayout>
