@@ -5,7 +5,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,8 +30,7 @@ import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
 public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTweetChangeListener, AdapterView.OnItemClickListener {
 
     private RetrieveTweetsAsyncTask retrieveTweetsAsyncTask;
-    private RecyclerView recyclerView;
-    //private ListView listView;
+    private ListView listView;
     private WLTwitterTweetListener tweetListener;
 
 
@@ -45,8 +43,8 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
         // Inflate the layout for this fragment
         View tweetsListView = inflater.inflate(R.layout.fragment_wltwitter_tweets_fragment_list, container, false);
 
-        //get the RecycleView from xml
-        recyclerView = (RecyclerView) tweetsListView.findViewById(R.id.wifiRecyclerView);
+        //get the ListView from xml
+        listView = (ListView) tweetsListView.findViewById(R.id.tweets_list_view);
 
         //Generate a progressBar from an emptyListView
         final ProgressBar progressBar = new ProgressBar(getActivity());
@@ -56,14 +54,15 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.CENTER));
         progressBar.setIndeterminate(true);
-        //listView.setEmptyView(progressBar);
+        listView.setEmptyView(progressBar);
 
 
-        //ViewGroup listFragmentView = (ViewGroup) tweetsListView.findViewById(R.id.tweets_list_fragment);
-        //listFragmentView.addView(progressBar);
+        ViewGroup listFragmentView = (ViewGroup) tweetsListView.findViewById(R.id.tweets_list_fragment);
+        listFragmentView.addView(progressBar);
 
         //set up ItemClick
-        //recyclerView.setOnClickListener(this);
+        listView.setClickable(true);
+        listView.setOnItemClickListener(this);
 
         return tweetsListView;
     }
@@ -71,7 +70,7 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
     @Override
     public void onStart() {
         super.onStart();
-        if (!TextUtils.isEmpty(PreferenceUtils.getLogin())) {
+        if(!TextUtils.isEmpty(PreferenceUtils.getLogin())) {
             //new AsyncTask
             retrieveTweetsAsyncTask = new RetrieveTweetsAsyncTask(this);
             retrieveTweetsAsyncTask.execute(PreferenceUtils.getLogin());
@@ -80,9 +79,10 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
 
     @Override
     public void onTweetRetrieved(List<Tweet> tweets) {
-        WLTwitterTweetAdapter tweetAdapter = new WLTwitterTweetAdapter(tweets);
+        final WLTwitterTweetAdapter tweetAdapter = new WLTwitterTweetAdapter(tweets);
         //set up tweet adapter
-        recyclerView.setAdapter(tweetAdapter);
+        listView.setAdapter(tweetAdapter);
+
     }
 
 
@@ -90,18 +90,19 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        if (activity instanceof WLTwitterTweetListener) {
+        if (activity instanceof WLTwitterTweetListener){
             //Pass the Activity threw a listener
             tweetListener = (WLTwitterTweetListener) activity;
         }
     }
 
-   @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        if (recyclerView != null) {
+    @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+        if (listView != null){
             //get the tweet which you clicked on by his position
             final Tweet tweet = (Tweet) adapterView.getItemAtPosition(position);
-            //throw a toast
+            //open the tweet
             tweetListener.onViewTweet(tweet);
         }
     }

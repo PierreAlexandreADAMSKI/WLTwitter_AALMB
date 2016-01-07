@@ -1,12 +1,13 @@
 package worldline.ssm.rd.ux.wltwitter.fragments.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,36 +18,50 @@ import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 /**
  * Created by mb-p_pilou on 17/12/2015.
  */
-public class WLTwitterTweetAdapter extends RecyclerView.Adapter<WLTwitterTweetAdapter.ViewHolder> {
+public class WLTwitterTweetAdapter extends BaseAdapter {
 
-    private LayoutInflater inflater = LayoutInflater.from(WLTwitterApplication.getContext());
     private List<Tweet> tweets;
+    private LayoutInflater inflater;
+
 
     public WLTwitterTweetAdapter(List<Tweet> tweets) {
         this.tweets = tweets;
+        inflater = LayoutInflater.from(WLTwitterApplication.getContext());
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder {
         public ImageView image;
         public TextView username;
         public TextView alias;
         public TextView tweetContent;
-        public Button retweet;
 
         public ViewHolder(View view) {
-            super(view);
             this.image = (ImageView) view.findViewById(R.id.image);
             this.username = (TextView) view.findViewById(R.id.tweet_username);
             this.alias = (TextView) view.findViewById(R.id.tweet_alias);
             this.tweetContent = (TextView) view.findViewById(R.id.tweet_content);
-            this.retweet = (Button) view.findViewById(R.id.tweet_retweet);
         }
     }
 
     @Override
-    public WLTwitterTweetAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewHolder viewHolder;
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.tweet_fragment_adapter,parent,false);
+    public int getCount() {
+        return tweets != null ? tweets.size() : 0;
+    }
+
+    @Override
+    public Tweet getItem(int position) {
+        return tweets != null ? tweets.get(position) : null;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final ViewHolder viewHolder;
+        //this.convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.tweet_fragment_adapter, null);
         //if the reused view is null then inflate the list of tweets
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.tweet_fragment_adapter, null);
@@ -59,28 +74,19 @@ public class WLTwitterTweetAdapter extends RecyclerView.Adapter<WLTwitterTweetAd
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        //get the current tweet
         final Tweet tweet = getItem(position);
         //set up username in the holder
+
         viewHolder.username.setText(tweet.user.name);
         //set up alias
         viewHolder.alias.setText("@" + tweet.user.screenName);
         //set up tweet
         viewHolder.tweetContent.setText(tweet.text);
-        //set up user image
-    }
 
-    @Override
-    public int getItemCount() {
-        return tweets != null ? tweets.size() : 0;
-    }
+        if (!tweet.user.profileImageUrl.isEmpty()) {
+            Picasso.with(WLTwitterApplication.getContext()).load(tweet.user.profileImageUrl).into(viewHolder.image);
+        }
 
-    public Tweet getItem(int position) {
-        return tweets != null ? tweets.get(position) : null;
+        return convertView;
     }
 }

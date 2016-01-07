@@ -1,13 +1,13 @@
 package worldline.ssm.rd.ux.wltwitter.pojo;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Tweet {
+public class Tweet implements Parcelable {
 
+	private int data;
 	@SerializedName("created_at")
 	public String dateCreated;
 
@@ -33,16 +33,34 @@ public class Tweet {
 	public String toString() {
 		return text;
 	}
-	
-	public long getDateCreatedTimestamp(){
-		final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", Locale.ENGLISH);
-		dateFormat.setLenient(false);
-		try {
-			final Date created = dateFormat.parse(dateCreated);
-			return created.getTime();
-		} catch (Exception e) {
-			return 0;
-		}
+
+	public Tweet(){}
+
+
+	protected Tweet(Parcel in) {
+		data = in.readInt();
 	}
-	
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(data);
+	}
+
+	@SuppressWarnings("unused")
+	public static final Parcelable.Creator<Tweet> CREATOR = new Parcelable.Creator<Tweet>() {
+		@Override
+		public Tweet createFromParcel(Parcel in) {
+			return new Tweet(in);
+		}
+
+		@Override
+		public Tweet[] newArray(int size) {
+			return new Tweet[size];
+		}
+	};
 }

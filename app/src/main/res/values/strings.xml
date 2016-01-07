@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">WLTwitter_Part1</string>
+    <string name="app_name">My Twitter</string>
     <string name="hello_world">Hello world!</string>
     <string name="congrats">Congratulations</string>
     <string name="success_login">You logged in successfully</string>
@@ -21,4 +21,9 @@
 
     <!-- ADAPTER -->
     <string name="retweet">Retweet</string>
+
+    <!-- TWEET -->
+    <string name="tweet_parcelable">Tweet Parcelable</string>
+    <string name="tweet_reply_parcelable">Tweet Reply Parcelable</string>
+
 </resources>

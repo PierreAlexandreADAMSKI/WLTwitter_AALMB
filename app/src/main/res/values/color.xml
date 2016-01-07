@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue_twitter">#FF44BBE3</color>
-    <color name="grey_twitter">#C9C9C9</color>
+    <color name="grey_twitter">#303030</color>
     <color name="text">#000000</color>
 </resources>

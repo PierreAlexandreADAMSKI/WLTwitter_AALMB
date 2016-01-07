@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tweet_alone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_twitter"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_round_corners_background"
+        android:padding="@dimen/tweet_list_item_padding">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="25dp"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/img"
+            android:layout_toRightOf="@+id/img"
+            android:text="cestmoi" />
+
+        <TextView
+            android:id="@+id/alias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/img"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/name"
+            android:layout_toRightOf="@+id/img"
+            android:text="alias" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="gagagagagagagaga"
+            android:layout_below="@+id/img"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:id="@+id/tweetReply"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/text"
+            android:background="@drawable/blue_round_corners_background"
+            android:text="Reply"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/tweetRetweet"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tweetReply"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/blue_round_corners_background"
+            android:text="Retweet"
+            android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/tweetStar"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tweetReply"
+            android:text="Star"
+            android:background="@drawable/blue_round_corners_background"
+            android:textColor="@android:color/white"/>
+    </RelativeLayout>
+
+</RelativeLayout>

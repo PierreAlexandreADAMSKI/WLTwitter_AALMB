@@ -26,8 +26,8 @@ public class RetrieveTweetsAsyncTask extends AsyncTask<String, Integer, List<Twe
         if (params != null && params.length > 0) login = params[0];
         if (login != null) {
             //get the tweets list from user account and return it
-            List<Tweet> tweetList = TwitterHelper.getTweetsOfUser(login);
-            return tweetList;
+            List<Tweet> tweets = TwitterHelper.getTweetsOfUser(login);
+            return tweets;
         } else {
             //if account is fake return fake list
             return TwitterHelper.getFakeTweets();

@@ -3,8 +3,8 @@
     android:id="@+id/tweet_adapter_box"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
     android:background="@drawable/blue_round_corners_background"
+    android:descendantFocusability="blocksDescendants"
     android:padding="5dp">
 
     <RelativeLayout
@@ -19,8 +19,7 @@
             android:layout_height="64dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_margin="5dp"
-            android:background="@drawable/white_round_corners_background" />
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/tweet_retweet"
