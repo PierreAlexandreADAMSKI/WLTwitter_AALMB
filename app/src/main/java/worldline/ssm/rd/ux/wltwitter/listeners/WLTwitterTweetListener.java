@@ -1,4 +1,4 @@
-package worldline.ssm.rd.ux.wltwitter.interfaces;
+package worldline.ssm.rd.ux.wltwitter.listeners;
 
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 

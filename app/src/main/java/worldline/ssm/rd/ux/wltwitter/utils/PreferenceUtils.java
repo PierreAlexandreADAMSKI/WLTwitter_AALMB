@@ -11,7 +11,7 @@ import worldline.ssm.rd.ux.wltwitter.WLTwitterApplication;
 public class PreferenceUtils {
 
     private static SharedPreferences getSharedPreferences(Context context){
-      return context.getSharedPreferences(Constants.Preferences.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
+      return context.getSharedPreferences(worldline.ssm.rd.ux.wltwitter.utils.Constants.Preferences.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
     }
     private static SharedPreferences getSharedPreferences(){
       return WLTwitterApplication.getContext().getSharedPreferences(Constants.Preferences.SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);

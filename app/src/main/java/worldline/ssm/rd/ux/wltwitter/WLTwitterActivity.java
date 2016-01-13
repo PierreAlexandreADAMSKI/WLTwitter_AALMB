@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import worldline.ssm.rd.ux.wltwitter.fragments.WLTwitterTweetFragment;
 import worldline.ssm.rd.ux.wltwitter.fragments.WLTwitterTweetsFragmentList;
-import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetListener;
+import worldline.ssm.rd.ux.wltwitter.listeners.WLTwitterTweetListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 import worldline.ssm.rd.ux.wltwitter.utils.Constants;
 import worldline.ssm.rd.ux.wltwitter.utils.PreferenceUtils;
@@ -105,16 +105,16 @@ public class WLTwitterActivity extends Activity implements WLTwitterTweetListene
 
     @Override
     public void onReply(Tweet tweet) {
-        Toast.makeText(WLTwitterApplication.getContext(), tweet.text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(worldline.ssm.rd.ux.wltwitter.WLTwitterApplication.getContext(), tweet.text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onRetweet(Tweet tweet) {
-        Toast.makeText(WLTwitterApplication.getContext(), "RT " + tweet.text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(worldline.ssm.rd.ux.wltwitter.WLTwitterApplication.getContext(), "RT " + tweet.text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStar(Tweet tweet) {
-        Toast.makeText(WLTwitterApplication.getContext(), tweet.text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(worldline.ssm.rd.ux.wltwitter.WLTwitterApplication.getContext(), tweet.text, Toast.LENGTH_SHORT).show();
     }
 }

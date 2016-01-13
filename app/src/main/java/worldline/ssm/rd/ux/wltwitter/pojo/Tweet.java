@@ -5,6 +5,11 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+
 public class Tweet implements Parcelable {
 
 	private int data;
@@ -52,7 +57,7 @@ public class Tweet implements Parcelable {
 	}
 
 	@SuppressWarnings("unused")
-	public static final Parcelable.Creator<Tweet> CREATOR = new Parcelable.Creator<Tweet>() {
+	public static final Creator<Tweet> CREATOR = new Creator<Tweet>() {
 		@Override
 		public Tweet createFromParcel(Parcel in) {
 			return new Tweet(in);
@@ -63,4 +68,15 @@ public class Tweet implements Parcelable {
 			return new Tweet[size];
 		}
 	};
+
+	public long getDateCreatedTimestamp(){
+		final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", Locale.ENGLISH);
+		dateFormat.setLenient(false);
+		try {
+			final Date created = dateFormat.parse(dateCreated);
+			return created.getTime();
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 }

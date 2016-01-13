@@ -6,7 +6,7 @@ import android.util.Log;
 import java.util.List;
 
 import worldline.ssm.rd.ux.wltwitter.helpers.TwitterHelper;
-import worldline.ssm.rd.ux.wltwitter.interfaces.WLTwitterTweetChangeListener;
+import worldline.ssm.rd.ux.wltwitter.listeners.WLTwitterTweetChangeListener;
 import worldline.ssm.rd.ux.wltwitter.pojo.Tweet;
 
 /**

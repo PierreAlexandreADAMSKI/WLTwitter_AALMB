@@ -141,7 +141,7 @@ public class WLTwitterLoginActivity extends Activity implements View.OnClickList
      */
     private Intent getNameActivityIntent(String login) {
         // instanciate a new intent of the WLTwitterActivity in WLTwitterApplication's context
-        Intent WLTwitterIntent = new Intent(this, WLTwitterActivity.class);
+        Intent WLTwitterIntent = new Intent(this, worldline.ssm.rd.ux.wltwitter.WLTwitterActivity.class);
         Bundle extra = new Bundle();
         //save login in Bundle
         extra.putString(Constants.Login.EXTRA_LOGIN, login);
