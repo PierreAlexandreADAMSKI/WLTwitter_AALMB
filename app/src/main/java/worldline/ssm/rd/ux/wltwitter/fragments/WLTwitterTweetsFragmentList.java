@@ -68,6 +68,9 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
                 Gravity.CENTER));
         progressBar.setIndeterminate(true);
 
+        //load data using cursor
+        getLoaderManager().initLoader(0, null, this);
+
         return recyclerView_;
     }
 
@@ -77,8 +80,6 @@ public class WLTwitterTweetsFragmentList extends Fragment implements WLTwitterTw
         //new AsyncTask
         this.retrieveTweetsAsyncTask = new RetrieveTweetsAsyncTask(this);
         this.retrieveTweetsAsyncTask.execute(PreferenceUtils.getLogin());
-        //load data using cursor
-        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
